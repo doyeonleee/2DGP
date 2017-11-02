@@ -42,6 +42,7 @@ def update():
     if (logo_time > 1.0):
         logo_time = 0
         # game_framework.quit()
+        # title image size 1000 x 600 -> change_state
         game_framework.push_state(title_state)
     delay(0.01)
     logo_time += 0.01

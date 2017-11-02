@@ -6,10 +6,11 @@ from pico2d import *
 name = "TitleState"
 image = None
 
-#load image( 800 X 600 )
+#load image( 1000 X 600 )
 def enter():
     global image
-    image = load_image('title.png')
+    open_canvas(1000, 600)
+    image = load_image('title_BackGround.png')
 
 
 def exit():
@@ -33,7 +34,7 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    image.draw(400,300)
+    image.draw(500,300)
     update_canvas()
 
 

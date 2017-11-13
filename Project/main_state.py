@@ -18,13 +18,17 @@ stage = None
 heart = None
 font = None
 
-
-def enter():
+def create_objects():
     global cat, stage, heart, stone
     cat = Cat()
     stage = Stage1()
     heart = Heart()
     stone = Stone()
+
+
+def enter():
+    game_framework.reset_time()
+    create_objects()
 
 
 def exit():
@@ -42,7 +46,7 @@ def resume():
     pass
 
 
-def handle_events():
+def handle_events(frame_time):
     global running, cat
 
     events = get_events()
@@ -58,12 +62,12 @@ def handle_events():
 
 
 
-def update():
-    cat.update()
+def update(frame_time):
+    cat.update(frame_time)
     update_canvas()
 
 
-def draw_main_scene():
+def draw_main_scene(frame_time):
 
     stage.draw()
     cat.draw()
@@ -72,9 +76,9 @@ def draw_main_scene():
 
 
 
-def draw():
+def draw(frame_time):
     clear_canvas()
-    draw_main_scene()
+    draw_main_scene(frame_time)
     update_canvas()
 
 

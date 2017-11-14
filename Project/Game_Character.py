@@ -87,3 +87,12 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
 
+
+
+class Man:
+    def __init__(self):
+        self.x, self.y = 900, 120
+        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man2.png')
+
+    def draw(self):
+        self.image.draw(self.x, self.y)

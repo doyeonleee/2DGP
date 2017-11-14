@@ -5,4 +5,4 @@ class Stone:
         self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\stone.png')
 
     def draw(self):
-        self.image.draw(900,50)
+        self.image.draw(500,50)

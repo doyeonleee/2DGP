@@ -4,7 +4,7 @@ import os
 
 from pico2d import *
 from Game_Stage import Stage1
-from Game_Character import Cat
+from Game_Character import Cat,Man
 from Game_Heart import Heart
 from Game_Obstacle import Stone
 
@@ -19,11 +19,12 @@ heart = None
 font = None
 
 def create_objects():
-    global cat, stage, heart, stone
+    global cat, stage, heart, stone, man
     cat = Cat()
     stage = Stage1()
     heart = Heart()
     stone = Stone()
+    man = Man()
 
 
 def enter():
@@ -32,11 +33,12 @@ def enter():
 
 
 def exit():
-    global cat, stage, heart, stone
+    global cat, stage, heart, stone, man
     del(cat)
     del(stage)
     del(heart)
     del(stone)
+    del(man)
 
 def pause():
     pass
@@ -73,6 +75,7 @@ def draw_main_scene(frame_time):
     cat.draw()
     heart.draw()
     stone.draw()
+    man.draw()
 
 
 

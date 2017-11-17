@@ -1,5 +1,6 @@
 from pico2d import *
 
+#Create Life
 class Heart:
     def __init__(self):
         self.image =load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart_FULL.png')

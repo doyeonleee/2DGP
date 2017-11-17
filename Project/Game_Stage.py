@@ -1,5 +1,7 @@
 from pico2d import *
 
+#Create Stage
+
 class Stage1:
         def __init__(self):
             self.image = load_image('Main_BackGround.png')

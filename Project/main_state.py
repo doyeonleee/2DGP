@@ -70,7 +70,6 @@ def update(frame_time):
 
 
 def draw_main_scene(frame_time):
-
     stage.draw()
     cat.draw()
     heart.draw()

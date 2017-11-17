@@ -2,9 +2,10 @@ import random
 
 from pico2d import *
 
+#Create Cat
 class Cat:
     # Cat size : 100 X 100 (100cm X 100cm)
-    PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 10cm
+    PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
     RUN_SPEED_KMPH = 30.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -87,8 +88,7 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
 
-
-
+#Create Man
 class Man:
     def __init__(self):
         self.x, self.y = 900, 120

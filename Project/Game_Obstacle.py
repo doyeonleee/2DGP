@@ -1,5 +1,7 @@
 from pico2d import *
 
+#Create Obstacle
+
 class Stone:
     def __init__(self):
         self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\stone.png')

@@ -18,6 +18,7 @@ class Cat:
     image = None
     LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE = 0, 1, 2, 3
 
+
     def __init__(self):
         self.x, self.y = 0, 90
         self.idle_frame = random.randint(0, 7)
@@ -28,6 +29,7 @@ class Cat:
         self.frame = 0
         self.dir = 0
         self.state = self.RIGHT_IDLE
+        self.jump_speed = 0
 
     #RUN = 8, IDLE = 10
     # frame == RUN = 8, IDLE = 10
@@ -45,8 +47,18 @@ class Cat:
             self.total_run_frames += Cat.FRAMES_PER_RUN_ACTION * Cat.ACTION_PER_TIME * frame_time
             self.frame = (self.frame + 1) % 8
             self.x += (self.dir * distance)
+        if (self.jump_speed > 0):
+            self.y += (self.jump_speed * distance)
+            self.y = clamp(0, self.y, 300)
+        else:
+            self.y += (self.jump_speed * distance)
+        if (self.y >= 300):
+            self.jump_speed = -3
+        if (self.y <= 90):
+            self.jump_speed = 0
 
         self.x = clamp(0, self.x, 1800)
+
 
     def draw(self):
         if self.state == self.RIGHT_IDLE:
@@ -87,6 +99,14 @@ class Cat:
         elif (event.type, event.key) == (SDL_KEYUP, SDLK_RIGHT):
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+            self.jump_speed = 3
+
+    def get_bb(self):
+        pass
+
+    def draw_bb(self):
+        pass
 
 #Create Man
 class Man:
@@ -96,3 +116,9 @@ class Man:
 
     def draw(self):
         self.image.draw(self.x, self.y)
+
+    def get_bb(self):
+        pass
+
+    def draw_bb(self):
+        pass

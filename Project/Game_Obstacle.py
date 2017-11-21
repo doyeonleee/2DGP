@@ -8,3 +8,9 @@ class Stone:
 
     def draw(self):
         self.image.draw(500,50)
+
+    def get_bb(self):
+        pass
+
+    def draw_bb(self):
+        pass

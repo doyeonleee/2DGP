@@ -63,6 +63,9 @@ def handle_events(frame_time):
         #    game_framework.push_state(pause_state)
 
 
+def collide(a,b):
+    pass
+
 
 def update(frame_time):
     cat.update(frame_time)

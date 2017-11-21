@@ -46,7 +46,7 @@ class Cat:
             self.frame = (self.frame + 1) % 8
             self.x += (self.dir * distance)
 
-        self.x = clamp(0, self.x, 1000)
+        self.x = clamp(0, self.x, 1800)
 
     def draw(self):
         if self.state == self.RIGHT_IDLE:
@@ -91,8 +91,8 @@ class Cat:
 #Create Man
 class Man:
     def __init__(self):
-        self.x, self.y = 900, 120
-        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man2.png')
+        self.x, self.y = 1700, 120
+        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man.png')
 
     def draw(self):
         self.image.draw(self.x, self.y)

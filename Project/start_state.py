@@ -11,9 +11,9 @@ logo_time = 0.0
 
 def enter():
     global image
-    open_canvas(1000,600)
+    open_canvas(1800,900)
     game_framework.reset_time()
-    image = load_image('kpu_credit.png')
+    image = load_image('start_bg.png')
 
 
 def exit():
@@ -35,7 +35,7 @@ def handle_events(frame_time):
 
 def draw(frame_time):
     clear_canvas()
-    image.draw(500,300)
+    image.draw(900,450)
     update_canvas()
 
 def update(frame_time):

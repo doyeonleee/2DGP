@@ -5,17 +5,22 @@ import main_state
 
 name = "TitleState"
 image = None
+text = None
+logo_time = 0.0
+counter = 0
 
-#load image( 1000 X 600 )
+#load image( 1800 X 900 )
 def enter():
-    global image
+    global image,text
     game_framework.reset_time()
-    image = load_image('title_BackGround.png')
+    image = load_image('title_bg.png')
+    text = load_image('title_txt.png')
 
 
 def exit():
-    global image
+    global image,text
     del(image)
+    del(text)
 
 
 def handle_events(frame_time):
@@ -33,13 +38,17 @@ def handle_events(frame_time):
 
 
 def draw(frame_time):
+    global counter
     clear_canvas()
-    image.draw(500,300)
+    image.draw(900,450)
+    if counter < 50:
+        text.draw(900,150)
     update_canvas()
 
 
 def update(frame_time):
-    pass
+    global  counter
+    counter = (counter + 1) % 100
 
 
 def pause():

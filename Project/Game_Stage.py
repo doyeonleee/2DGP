@@ -4,7 +4,7 @@ from pico2d import *
 
 class Stage1:
         def __init__(self):
-            self.image = load_image('Main_BackGround.png')
+            self.image = load_image('stage1.png')
 
         def draw(self):
-            self.image.draw(500, 300)
+            self.image.draw(900, 450)

@@ -6,4 +6,4 @@ class Heart:
         self.image =load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart_FULL.png')
 
     def draw(self):
-        self.image.draw(900,500)
+        self.image.draw(1600,700)

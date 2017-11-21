@@ -6,7 +6,7 @@ from pico2d import *
 class Cat:
     # Cat size : 100 X 100 (100cm X 100cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 30.0  # 30km/h
+    RUN_SPEED_KMPH = 40.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)

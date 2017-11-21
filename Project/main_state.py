@@ -6,7 +6,7 @@ from pico2d import *
 from Game_Stage import Stage1
 from Game_Character import Cat,Man
 from Game_Heart import Heart
-from Game_Obstacle import Stone
+from Game_Obstacle import Stone, Pumpkin, Zombie
 
 import game_framework
 import title_state
@@ -16,15 +16,20 @@ name = "MainState"
 cat = None
 stage = None
 heart = None
+pumpkin = None
+zombie = None
 font = None
 
 def create_objects():
-    global cat, stage, heart, stone, man
+    global cat, stage, heart, stone, man, pumpkin, zombie
     cat = Cat()
     stage = Stage1()
     heart = Heart()
     stone = Stone()
+    pumpkin = Pumpkin()
+    zombie = Zombie()
     man = Man()
+
 
 
 def enter():
@@ -33,12 +38,14 @@ def enter():
 
 
 def exit():
-    global cat, stage, heart, stone, man
+    global cat, stage, heart, stone, man, pumpkin, zombie
     del(cat)
     del(stage)
     del(heart)
     del(stone)
     del(man)
+    del(pumpkin)
+    del(zombie)
 
 def pause():
     pass
@@ -69,6 +76,9 @@ def collide(a,b):
 
 def update(frame_time):
     cat.update(frame_time)
+    pumpkin.update(frame_time)
+    zombie.update(frame_time)
+
     update_canvas()
 
 
@@ -78,6 +88,8 @@ def draw_main_scene(frame_time):
     heart.draw()
     stone.draw()
     man.draw()
+    pumpkin.draw()
+    zombie.draw()
 
 
 

@@ -105,24 +105,18 @@ def update(frame_time):
 
 def draw_main_scene(frame_time):
     stage.draw()
-
     cat.draw()
-    #cat.draw_bb()
-
     stone.draw()
-    #stone.draw_bb()
-
     man.draw()
-    #man.draw_bb()
-
     pumpkin.draw()
-    #pumpkin.draw_bb()
-
     zombie.draw()
-    #zombie.draw_bb()
-
     heart.draw()
 
+    #zombie.draw_bb()
+    #pumpkin.draw_bb()
+    #man.draw_bb()
+    #stone.draw_bb()
+    #cat.draw_bb()
 
 
 def draw(frame_time):

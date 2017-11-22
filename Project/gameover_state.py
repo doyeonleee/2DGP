@@ -32,7 +32,6 @@ def update(frame_time):
     pass
 
 def draw(frame_time):
-
     global image, counter
     clear_canvas()
     #main_state.draw_main_scene(frame_time)
@@ -43,9 +42,6 @@ def draw(frame_time):
 
 
     update_canvas()
-
-
-
 
 def handle_events(frame_time):
     events = get_events()

@@ -16,12 +16,10 @@ def enter():
     image = load_image('title.png')
     text = load_image('title_txt.png')
 
-
 def exit():
     global image,text
     del(image)
     del(text)
-
 
 def handle_events(frame_time):
     events = get_events()

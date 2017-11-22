@@ -13,7 +13,7 @@ counter = 0
 def enter():
     global image,text
     game_framework.reset_time()
-    image = load_image('title_bg.png')
+    image = load_image('title.png')
     text = load_image('title_txt.png')
 
 

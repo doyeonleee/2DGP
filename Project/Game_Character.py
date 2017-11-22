@@ -20,7 +20,7 @@ class Cat:
 
 
     def __init__(self):
-        self.x, self.y = 0, 90
+        self.x, self.y = 0, 160
         self.idle_frame = random.randint(0, 7)
         self.run_frame = random.randint(0, 9)
         self.life_time = 0.0
@@ -49,13 +49,14 @@ class Cat:
             self.x += (self.dir * distance)
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
-            self.y = clamp(0, self.y, 300)
+            self.y = clamp(0, self.y, 400)
         else:
             self.y += (self.jump_speed * distance)
-        if (self.y >= 300):
+        if (self.y >= 400):
             self.jump_speed = -3
-        if (self.y <= 90):
+        if (self.y <= 160):
             self.jump_speed = 0
+            self.y = 160
 
         self.x = clamp(0, self.x, 1800)
 
@@ -111,7 +112,7 @@ class Cat:
 #Create Man
 class Man:
     def __init__(self):
-        self.x, self.y = 1700, 120
+        self.x, self.y = 1750, 200
         self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man.png')
 
     def draw(self):

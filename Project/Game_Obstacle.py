@@ -9,7 +9,7 @@ class Stone:
         self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\stone.png')
 
     def draw(self):
-        self.image.draw(500,50)
+        self.image.draw(1500,140)
 
     def get_bb(self):
         pass
@@ -20,7 +20,7 @@ class Stone:
 class Pumpkin:
     # Pumkin size : 113 X 150 (113cm X 150cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 20.0  # 30km/h
+    RUN_SPEED_KMPH = 5.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -32,7 +32,7 @@ class Pumpkin:
     LEFT_WALK, RIGHT_WALK = 0, 1
 
     def __init__(self):
-        self.x, self.y = 1000, 110
+        self.x, self.y = 1000, 180
         self.walk_frame = random.randint(0, 9)
         self.life_time = 0.0
         self.total_walk_frames = 0.0
@@ -56,10 +56,10 @@ class Pumpkin:
             self.frame = (self.frame + 1) % 10
             self.x += (self.dir * distance)
 
-        self.x = clamp(1000, self.x, 1400)
-        if(self.x == 1400):
+        self.x = clamp(600, self.x, 1100)
+        if(self.x == 1100):
             self.state = self.LEFT_WALK
-        elif(self.x == 1000):
+        elif(self.x == 600):
             self.state = self.RIGHT_WALK
 
     def draw(self):
@@ -89,7 +89,7 @@ class Santa:
 class Zombie:
     # Zombie size : 124 X 150 (124cm X 150cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 5.0  # 30km/h
+    RUN_SPEED_KMPH = 1.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -101,7 +101,7 @@ class Zombie:
     LEFT_WALK, RIGHT_WALK = 0, 1
 
     def __init__(self):
-        self.x, self.y = 500, 110
+        self.x, self.y = 500, 180
         self.walk_frame = random.randint(0, 9)
         self.life_time = 0.0
         self.total_walk_frames = 0.0
@@ -125,10 +125,10 @@ class Zombie:
             self.frame = (self.frame + 1) % 10
             self.x += (self.dir * distance)
 
-        self.x = clamp(500, self.x, 700)
+        self.x = clamp(600, self.x, 700)
         if (self.x == 700):
             self.state = self.LEFT_WALK
-        elif (self.x == 500):
+        elif (self.x == 600):
             self.state = self.RIGHT_WALK
 
     def draw(self):

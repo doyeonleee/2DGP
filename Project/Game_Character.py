@@ -104,10 +104,10 @@ class Cat:
             self.jump_speed = 3
 
     def get_bb(self):
-        pass
+        return self.x - 20, self.y - 30, self.x + 20, self.y + 30
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())
 
 #Create Man
 class Man:

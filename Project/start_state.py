@@ -4,6 +4,7 @@ from pico2d import *
 #import main_state
 import title_state
 
+
 name = "StartState"
 image = None
 logo_time = 0.0
@@ -45,7 +46,7 @@ def update(frame_time):
         # game_framework.quit()
         # title image size 1000 x 600 -> change_state
         game_framework.push_state(title_state)
-    delay(0.01)
+    #delay(0.01)
     logo_time += 0.01
 
 

@@ -7,15 +7,17 @@ from pico2d import *
 class Stone:
     def __init__(self):
         self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\stone.png')
+        self.x = 1400
+        self.y = 140
 
     def draw(self):
-        self.image.draw(1500,140)
+        self.image.draw(1400,140)
 
     def get_bb(self):
-        pass
+        return self.x - 30, self.y - 20, self.x + 30, self.y + 20
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())
 
 class Pumpkin:
     # Pumkin size : 113 X 150 (113cm X 150cm)
@@ -78,10 +80,14 @@ class Pumpkin:
         pass
 
     def get_bb(self):
-        pass
+        return self.x - 20, self.y - 20, self.x + 20, self.y + 20
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())
+
+    def stop(self):
+        self.dir = 0
+
 
 class Santa:
     pass
@@ -147,7 +153,7 @@ class Zombie:
         pass
 
     def get_bb(self):
-        pass
+        return self.x - 20, self.y - 20, self.x + 20, self.y + 20
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())

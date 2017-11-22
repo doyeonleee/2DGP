@@ -10,6 +10,7 @@ from Game_Obstacle import Stone, Pumpkin, Zombie
 
 import game_framework
 import title_state
+import gameover_state
 
 name = "MainState"
 
@@ -71,7 +72,15 @@ def handle_events(frame_time):
 
 
 def collide(a,b):
-    pass
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+    return True
 
 
 def update(frame_time):
@@ -79,23 +88,48 @@ def update(frame_time):
     pumpkin.update(frame_time)
     zombie.update(frame_time)
 
+    if collide(cat,pumpkin):
+        heart.attacked()
+
+    if collide(cat,zombie):
+        heart.attacked()
+
+    if collide(cat,stone):
+        heart.attacked()
+
+    if( heart.state == heart.DIE):
+        game_framework.change_state(gameover_state)
+
     update_canvas()
 
 
 def draw_main_scene(frame_time):
     stage.draw()
+
     cat.draw()
-    heart.draw()
+    #cat.draw_bb()
+
     stone.draw()
+    #stone.draw_bb()
+
     man.draw()
+    #man.draw_bb()
+
     pumpkin.draw()
+    #pumpkin.draw_bb()
+
     zombie.draw()
+    #zombie.draw_bb()
+
+    heart.draw()
 
 
 
 def draw(frame_time):
     clear_canvas()
     draw_main_scene(frame_time)
+
+
     update_canvas()
 
 

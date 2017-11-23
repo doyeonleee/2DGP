@@ -4,7 +4,7 @@ import os
 
 from pico2d import *
 from Game_Stage import Stage1
-from Game_Character import Cat,Man
+from Game_Character import Cat, Man
 from Game_Heart import Heart
 from Game_Obstacle import Stone, Pumpkin, Zombie
 

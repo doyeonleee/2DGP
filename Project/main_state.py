@@ -1,9 +1,11 @@
 import random
 import json
 import os
+from global_values import *
+import global_values
 
 from pico2d import *
-from Game_Stage import Stage1
+from Game_Stage import Stage1, BackGround
 from Game_Character import Cat, Man
 from Game_Heart import Heart
 from Game_Obstacle import Stone, Pumpkin, Zombie
@@ -13,16 +15,17 @@ import title_state
 import gameover_state
 
 name = "MainState"
-
 cat = None
 stage = None
 heart = None
 pumpkin = None
 zombie = None
 font = None
+CHARACTER_RUNNING = False
+background_image = None
 
 def create_objects():
-    global cat, stage, heart, stone, man, pumpkin, zombie
+    global cat, stage, heart, stone, man, pumpkin, zombie, background_image
     cat = Cat()
     stage = Stage1()
     heart = Heart()
@@ -30,16 +33,18 @@ def create_objects():
     pumpkin = Pumpkin()
     zombie = Zombie()
     man = Man()
+    background_image = BackGround()
 
 
 
 def enter():
+    #open_canvas(1479,600)
     game_framework.reset_time()
     create_objects()
 
 
 def exit():
-    global cat, stage, heart, stone, man, pumpkin, zombie
+    global cat, stage, heart, stone, man, pumpkin, zombie, background_image
     del(cat)
     del(stage)
     del(heart)
@@ -47,6 +52,8 @@ def exit():
     del(man)
     del(pumpkin)
     del(zombie)
+    del(background_image)
+    #close_canvas()
 
 def pause():
     pass
@@ -57,7 +64,7 @@ def resume():
 
 
 def handle_events(frame_time):
-    global running, cat
+    global CHARACTER_RUNNING
 
     events = get_events()
     for event in events:
@@ -66,7 +73,9 @@ def handle_events(frame_time):
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_state(title_state)
         else:
+            CHARACTER_RUNNING = True
             cat.handle_event(event)
+            stage.handle_event(event)
         #elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
         #    game_framework.push_state(pause_state)
 
@@ -85,17 +94,21 @@ def collide(a,b):
 
 def update(frame_time):
     cat.update(frame_time)
+    stage.update(frame_time)
     pumpkin.update(frame_time)
     zombie.update(frame_time)
 
     if collide(cat,pumpkin):
-        heart.attacked()
+        #heart.attacked()
+        pass
 
     if collide(cat,zombie):
-        heart.attacked()
+        #heart.attacked()
+        pass
 
     if collide(cat,stone):
-        heart.attacked()
+        #heart.attacked()
+        pass
 
     if( heart.state == heart.DIE):
         game_framework.change_state(gameover_state)
@@ -104,7 +117,8 @@ def update(frame_time):
 
 
 def draw_main_scene(frame_time):
-    stage.draw()
+    #stage.draw(frame_time)
+    background_image.draw()
     cat.draw()
     stone.draw()
     man.draw()

@@ -1,6 +1,9 @@
 import random
 
 from pico2d import *
+from global_values import *
+
+CHARACTER_RUNNING = False
 
 #Create Cat
 class Cat:
@@ -16,11 +19,12 @@ class Cat:
     FRAMES_PER_IDLE_ACTION = 10
 
     image = None
+    RUN_STATE = False
     LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE = 0, 1, 2, 3
 
 
     def __init__(self):
-        self.x, self.y = 0, 160
+        self.x, self.y = 0, 90
         self.idle_frame = random.randint(0, 7)
         self.run_frame = random.randint(0, 9)
         self.life_time = 0.0
@@ -43,17 +47,22 @@ class Cat:
             self.total_idle_frames += Cat.FRAMES_PER_IDLE_ACTION * Cat.ACTION_PER_TIME * frame_time
             self.frame = (self.frame + 1) % 10
             self.x += (self.dir * distance)
+
         elif self.state in (self.RIGHT_RUN, self.LEFT_RUN):
             self.total_run_frames += Cat.FRAMES_PER_RUN_ACTION * Cat.ACTION_PER_TIME * frame_time
             self.frame = (self.frame + 1) % 8
             self.x += (self.dir * distance)
+
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
             self.y = clamp(0, self.y, 400)
+
         else:
             self.y += (self.jump_speed * distance)
+
         if (self.y >= 400):
             self.jump_speed = -3
+
         if (self.y <= 160):
             self.jump_speed = 0
             self.y = 160
@@ -62,6 +71,7 @@ class Cat:
 
 
     def draw(self):
+        global CHARACTER_RUNNING
         if self.state == self.RIGHT_IDLE:
             if Cat.image == None:
                 self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_Right_Idle2.png')
@@ -102,6 +112,7 @@ class Cat:
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             self.jump_speed = 3
+
 
     def get_bb(self):
         return self.x - 20, self.y - 30, self.x + 20, self.y + 30

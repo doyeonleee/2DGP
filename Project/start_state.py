@@ -1,5 +1,6 @@
 import game_framework
 from pico2d import *
+from global_values import *
 
 #import main_state
 import title_state
@@ -10,9 +11,13 @@ image = None
 logo_time = 0.0
 
 
+window_width = 1479
+window_height = 600
+
 def enter():
     global image
-    open_canvas(1800,900)
+    #open_canvas(1800,900)
+    #open_canvas(window_width, window_height)
     game_framework.reset_time()
     image = load_image('start_bg.png')
 
@@ -20,7 +25,7 @@ def enter():
 def exit():
     global image
     del(image)
-    close_canvas()
+    #close_canvas()
 
 
 def handle_events(frame_time):
@@ -36,7 +41,7 @@ def handle_events(frame_time):
 
 def draw(frame_time):
     clear_canvas()
-    image.draw(900,450)
+    image.draw(window_width / 2, window_height / 2)
     update_canvas()
 
 def update(frame_time):

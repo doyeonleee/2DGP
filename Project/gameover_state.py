@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 
-import main_state
+import main_state_2
 import title_state
 
 name = "gameover"
@@ -35,10 +35,10 @@ def draw(frame_time):
     global image, counter
     clear_canvas()
     #main_state.draw_main_scene(frame_time)
-    bg.draw(900,450)
+    bg.draw(900,300)
     if counter < 50:
-        txt.draw(900,250)
-    image.draw(900,500)
+        txt.draw(770, 200)
+    image.draw(820,500)
 
 
     update_canvas()

@@ -2,6 +2,7 @@ import game_framework
 from pico2d import *
 
 import main_state
+import main_state_2
 
 name = "TitleState"
 image = None
@@ -9,12 +10,16 @@ text = None
 logo_time = 0.0
 counter = 0
 
-#load image( 1800 X 900 )
+
+window_width = 1479
+window_height = 600
+
+#load image( 1479 X 600 )
 def enter():
     global image,text
     game_framework.reset_time()
-    image = load_image('title.png')
-    text = load_image('title_txt.png')
+    image = load_image('title_1.png')
+    text = load_image('title_txt_1.png')
 
 def exit():
     global image,text
@@ -30,7 +35,7 @@ def handle_events(frame_time):
             if( event.type, event.key ) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif( event.type, event.key ) == (SDL_KEYDOWN, SDLK_SPACE):
-                game_framework.change_state(main_state)
+                game_framework.change_state(main_state_2)
                 #game_framework.quit()
 
 
@@ -38,9 +43,9 @@ def handle_events(frame_time):
 def draw(frame_time):
     global counter
     clear_canvas()
-    image.draw(900,450)
+    image.draw(window_width / 2, window_height / 2)
     if counter < 50:
-        text.draw(900,150)
+        text.draw(window_width / 2,150)
     update_canvas()
 
 

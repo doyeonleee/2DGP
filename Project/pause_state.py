@@ -2,7 +2,8 @@ import game_framework
 from pico2d import *
 
 import title_state
-import main_state
+#import main_state
+import main_state_2
 
 name = "PauseState"
 image = None
@@ -12,7 +13,8 @@ counter = 0
 def enter():
     global image
     #open_canvas()
-    image = load_image('movPause.png')
+    if image == None:
+        image = load_image('background_stage_1.png')
 
 
 def exit():
@@ -31,7 +33,7 @@ def draw():
 
     global image, counter
     clear_canvas()
-    main_state.draw_main_scene()
+    main_state_2.draw_main_scene()
     if counter < 50:
         image.draw(400,300)
     update_canvas()

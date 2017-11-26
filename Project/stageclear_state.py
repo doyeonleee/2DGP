@@ -7,40 +7,29 @@ import title_state
 name = "gameover"
 image = None
 bg = None
-txt = None
 logo_time = 0.0
 counter = 0
 
 def enter():
-    global image, bg,txt
-    image = load_image('gameover.png')
+    global image, bg
+    image = load_image('stageclear.png')
     bg = load_image('stage_1.png')
-    txt = load_image('gameover_txt.png')
 
 
 def exit():
-    global image, bg, txt
+    global image, bg
     del(image)
     del(bg)
-    del(txt)
-
 
 def update(frame_time):
-    #counter = image delay
-    global counter
-    counter = (counter + 1) % 100
     pass
 
 def draw(frame_time):
     global image, counter
     clear_canvas()
-    #main_state.draw_main_scene(frame_time)
+    #main_state_2.draw_main_scene(frame_time)
     bg.draw(900,300)
-    if counter < 50:
-        txt.draw(770, 200)
-    image.draw(820,500)
-
-
+    image.draw(730,300)
     update_canvas()
 
 def handle_events(frame_time):
@@ -50,8 +39,8 @@ def handle_events(frame_time):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             #if keydown 'p' return to previous state
-            game_framework.push_state(title_state)
-
+            #game_framework.push_state(main_state_2)
+            game_framework.quit()
 
 
 def pause(): pass

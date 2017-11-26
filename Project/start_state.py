@@ -16,8 +16,7 @@ window_height = 600
 
 def enter():
     global image
-    #open_canvas(1800,900)
-    #open_canvas(window_width, window_height)
+    open_canvas(window_width, window_height)
     game_framework.reset_time()
     image = load_image('start_bg.png')
 
@@ -25,7 +24,7 @@ def enter():
 def exit():
     global image
     del(image)
-    #close_canvas()
+    close_canvas()
 
 
 def handle_events(frame_time):

@@ -5,6 +5,8 @@ import os
 import game_framework
 import gameover_state
 import title_state
+import pause_state
+import stageclear_state
 
 from pico2d import *
 from collision import *
@@ -28,6 +30,8 @@ move_frames = 0
 
 cat_run_status = False
 
+
+# object class
 class Heart:
     FIRST, SECOND, THIRD, LAST, DIE = 0, 1, 2, 3, 4
     def __init__(self):
@@ -59,7 +63,7 @@ class Cat:
     image = None
     # Cat size : 100 X 100 (100cm X 100cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 50.0  # 30km/h
+    RUN_SPEED_KMPH = 30.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -97,8 +101,8 @@ class Cat:
                     zombie.x -= distance
                 for stone in stones:
                     stone.x -= distance
-                for cat_man in man:
-                    cat_man.x -= distance
+                for master in man:
+                    master.x -= distance
 
             elif self.state == self.LEFT_RUN:
                 for lands in land:
@@ -107,8 +111,8 @@ class Cat:
                     zombie.x += distance
                 for stone in stones:
                     stone.x += distance
-                for cat_man in man:
-                    cat_man.x += distance
+                for master in man:
+                    master.x += distance
 
 
             self.frame = (self.frame + 1) % 8
@@ -182,6 +186,9 @@ class Cat:
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
+    def stop(self, master):
+        self.x = master.x - 80
+
 class BackGround:
     # image size = 1479 x 600
     def __init__(self):
@@ -192,20 +199,20 @@ class BackGround:
 
     def draw(self):
         global move_frames
-
-        self.image.clip_draw(move_frames, 0, window_width, window_height, self.x, self.y)
+        #self.image.clip_draw(move_frames, 0, window_width, window_height, self.x, self.y)
+        self.image.draw(self.x, self.y)
 
     def update(self,frame_time):
         global move_frames
         if cat_run_status == True:
-            move_frames += cat.dir * 50
+            move_frames += cat.dir * 40
 
         if move_frames < 0:
             move_frames = 0
         elif move_frames > stage_size - window_width:
             move_frames = stage_size - window_width
 
-        print(move_frames)
+        #print(move_frames)
 
 class Land:
     def __init__(self, x , y, image_name):
@@ -242,36 +249,10 @@ class Man:
         self.image.draw(self.x, self.y)
 
     def get_bb(self):
-        return self.x + 100, self.y + 100, self.x - 100, self. y + 100
+        return self.x - 75, self.y - 70, self.x + 75, self. y + 70
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
-
-def create_lands():
-    start_land = Land(390, 50, 'land_start.png')
-
-    #for i in range(2):
-    #    lands = Land(random.randint(390,1600), 0, None)
-
-    road_1 = Land(1300, 5, None)
-
-    zombie_land = Land(2200, 70, 'land_zombie.png')
-
-    for i in range(10):
-        roads = Land(random.randint(2300,4000), 5, None)
-
-def create_zombies():
-    global move_frames
-    for i in range(1):
-        #zombie = Zombie(random.randint(move_frames,move_frames + window_width), 90)
-        zombie = Zombie(2500, 110)
-
-def create_stones():
-    for i in range(2):
-        stone = Stone(random.randint(1100,1500),80)
-
-def create_man():
-    clear_man = Man(2800,150)
 
 class Zombie:
     # Zombie size : 124 X 150 (124cm X 150cm)
@@ -346,6 +327,33 @@ class Stone:
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
+# create_function
+def create_lands():
+    start_land = Land(390, 50, 'land_start.png')
+
+    #for i in range(2):
+    #    lands = Land(random.randint(390,1600), 0, None)
+
+    road_1 = Land(1300, 5, None)
+
+    zombie_land = Land(2200, 70, 'land_zombie.png')
+
+    for i in range(10):
+        roads = Land(random.randint(2300,4000), 5, None)
+
+def create_zombies():
+    global move_frames
+    for i in range(1):
+        #zombie = Zombie(random.randint(move_frames,move_frames + window_width), 90)
+        zombie = Zombie(2500, 110)
+
+def create_stones():
+    for i in range(1):
+        stone = Stone(random.randint(1100,1500),80)
+
+def create_man():
+    master = Man(3300,150)
+
 def create_objects():
     global background, cat, zombie, heart, man
     background = BackGround()
@@ -356,17 +364,33 @@ def create_objects():
     create_stones()
     create_man()
 
+def delete_objects():
+    for stone in stones:
+        stones.remove(stone)
+
+    for zombie in zombies:
+        zombies.remove(zombie)
+
+    for lands in land:
+        land.remove(lands)
+
+    for master in man:
+        man.remove(master)
+
+
+# state
 def enter():
-    open_canvas(window_width,window_height)
+    #open_canvas(window_width,window_height)
     game_framework.reset_time()
     create_objects()
 
 def exit():
     global background, cat, heart
+    delete_objects()
     del(background)
     del(cat)
     del(heart)
-    close_canvas()
+    #close_canvas()
 
 def pause():
     pass
@@ -379,32 +403,31 @@ def handle_events(frame_time):
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.change_state(title_state)
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
+            game_framework.push_state(stageclear_state)
         else:
             cat.handle_event(event)
 
 def update(frame_time):
+    global move_frames
     cat.update(frame_time)
     for zombie in zombies:
         zombie.update(frame_time)
         if collide(cat, zombie):
             heart.attacked()
+            zombies.remove(zombie)
 
     for stone in stones:
         if collide(cat, stone):
             heart.attacked()
+            #stones.remove(stone)
 
-    for roads in land:
-        if collide(cat,roads):
-            return
+    for master in man:
+        if collide(cat, master):
+            cat.stop(master)
+            #game_framework.push_state(stageclear_state)
 
     background.update(frame_time)
-
-    #if collide(cat,zombie):
-    #    heart.attacked()
-
-
 
     if( heart.state == heart.DIE):
         game_framework.push_state(gameover_state)
@@ -415,23 +438,18 @@ def draw_main_scene(frame_time):
     background.draw()
     for lands in land:
         lands.draw()
-        lands.draw_bb()
     cat.draw()
-    cat.draw_bb()
 
     for stone in stones:
         stone.draw()
-        stone.draw_bb()
 
-    for cat_man in man:
-        cat_man.draw()
-        cat_man.draw_bb()
+    for master in man:
+        master.draw()
 
     heart.draw()
     if move_frames >= 2000:
         for zombie in zombies:
             zombie.draw()
-            zombie.draw_bb()
 
 def draw(frame_time):
     clear_canvas()

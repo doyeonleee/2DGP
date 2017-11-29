@@ -13,9 +13,9 @@ counter = 0
 
 def enter():
     global image, bg,txt
-    image = load_image('gameover.png')
-    bg = load_image('stage_1.png')
-    txt = load_image('gameover_txt.png')
+    image = load_image('Resources\GameOver\GameOver.png')
+    bg = load_image('Resources\GameOver\Background.png')
+    txt = load_image('Resources\GameOver\GameOver_txt.png')
 
 
 def exit():

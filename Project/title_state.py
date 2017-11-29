@@ -18,8 +18,8 @@ window_height = 600
 def enter():
     global image,text
     game_framework.reset_time()
-    image = load_image('title_1.png')
-    text = load_image('title_txt_1.png')
+    image = load_image('Resources\Title\Title.png')
+    text = load_image('Resources\Title\Title_txt.png')
 
 def exit():
     global image,text

@@ -47,16 +47,16 @@ class Heart:
 
     def draw(self):
         if(self.state == self.FIRST):
-            self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart1.png')
+            self.image = load_image('Resources\Life\Heart_Full.png')
             self.image.draw(self.x, self.y)
         elif (self.state == self.SECOND):
-            self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart2.png')
+            self.image = load_image('Resources\Life\Heart_Attacked_1.png')
             self.image.draw(self.x, self.y)
         elif (self.state == self.THIRD):
-            self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart3.png')
+            self.image = load_image('Resources\Life\Heart_Attacked_2.png')
             self.image.draw(self.x, self.y)
         elif (self.state == self.LAST):
-            self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Heart4.png')
+            self.image = load_image('Resources\Life\Heart_Die.png')
             self.image.draw(self.x, self.y)
 
 class Cat:
@@ -74,6 +74,12 @@ class Cat:
 
     LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE = 0, 1, 2, 3
 
+    HANDLE_STATE = {
+        #LEFT_RUN : HANDLE_LEFT_RUN
+        #RIGHT_RUN : HANDLE_RIGHT_RUN
+        #LEFT_STAND : HANDLE_LEFT_STAND
+        #RIGHT_STAND : HANDLE_RIGHT_STAND
+    }
 
     def __init__(self):
         self.x, self.y = 300, 110
@@ -135,22 +141,22 @@ class Cat:
     def draw(self):
         if self.state == self.RIGHT_IDLE:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_Right_Idle2.png')
+                self.image = load_image('Resources\Character\Cat\Cat_Right_Idle.png')
                 self.image.clip_draw(self.frame * 98, 0, 89, 90, self.x, self.y)
                 self.dir = 0
         elif self.state == self.LEFT_IDLE:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_LEFT_Idle2.png')
+                self.image = load_image('Resources\Character\Cat\Cat_LEFT_Idle.png')
                 self.image.clip_draw(self.frame * 98, 0, 89, 90, self.x, self.y)
                 self.dir = 0
         elif self.state == self.RIGHT_RUN:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_Right_RUN.png')
+                self.image = load_image('Resources\Character\Cat\Cat_Right_RUN.png')
                 self.image.clip_draw(self.frame * 100, 0, 100, 101, self.x, self.y)
                 self.dir = 1
         elif self.state == self.LEFT_RUN:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_LEFT_RUN.png')
+                self.image = load_image('Resources\Character\Cat\Cat_LEFT_RUN.png')
                 self.image.clip_draw(self.frame * 100, 0, 100, 101, self.x, self.y)
                 self.dir = -1
 
@@ -192,7 +198,7 @@ class Cat:
 class BackGround:
     # image size = 1479 x 600
     def __init__(self):
-        self.image = load_image('background_stage_1.png')
+        self.image = load_image('Resources\Stage\Stage1\Background\Stage1_Background.png')
         self.x = window_width / 2
         self.y = window_height / 2
         self.move_frame = 0
@@ -218,7 +224,7 @@ class Land:
     def __init__(self, x , y, image_name):
         self.image_tmp = image_name
         if image_name == None:
-            self.image = load_image('land_basic.png')
+            self.image = load_image('Resources\Stage\Stage1\Land\Land_Basic.png')
         else:
             self.image = load_image(image_name)
         self.x = x
@@ -229,9 +235,9 @@ class Land:
          self.image.draw(self.x, self.y)
 
     def get_bb(self):
-        if self.image_tmp == 'land_start.png':
+        if self.image_tmp == 'Resources\Stage\Stage1\Land\Land_Start.png':
             return self.x - 400, self.y - 10, self.x + 350, self.y + 20
-        elif self.image_tmp == 'land_zombie.png':
+        elif self.image_tmp == 'Resources\Stage\Stage1\Land\Land_Zombie.png':
             return self.x - 400, self.y - 20, self.x + 280, self.y - 5
         else:
             return self.x - 320, self.y +30, self.x + 320, self.y + 60
@@ -242,7 +248,7 @@ class Land:
 class Man:
     def __init__(self,x , y):
         self.x, self.y = x, y
-        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man.png')
+        self.image = load_image('Resources\Character\Man\Man.png')
         man.append(self)
 
     def draw(self):
@@ -293,12 +299,12 @@ class Zombie:
     def draw(self):
         if self.state == self.RIGHT_WALK:
             if Zombie.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Zombie_Right.png')
+                self.image = load_image('Resources\Obstacle\Zombie\Zombie_Right.png')
                 self.image.clip_draw(self.frame * 100, 0, 100, 121, self.x, self.y)
                 self.dir = 1
         elif self.state == self.LEFT_WALK:
             if Zombie.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Zombie_Left.png')
+                self.image = load_image('Resources\Obstacle\Zombie\Zombie_Left.png')
                 self.image.clip_draw(self.frame * 100, 0, 100, 121, self.x, self.y)
                 self.dir = -1
 
@@ -313,7 +319,7 @@ class Zombie:
 
 class Stone:
     def __init__(self, x, y):
-        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\stone.png')
+        self.image = load_image('Resources\Obstacle\Stone\Stage1_Stone.png')
         self.x = x
         self.y = y
         stones.append(self)
@@ -329,14 +335,11 @@ class Stone:
 
 # create_function
 def create_lands():
-    start_land = Land(390, 50, 'land_start.png')
-
-    #for i in range(2):
-    #    lands = Land(random.randint(390,1600), 0, None)
+    start_land = Land(390, 50, 'Resources\Stage\Stage1\Land\Land_Start.png')
 
     road_1 = Land(1300, 5, None)
 
-    zombie_land = Land(2200, 70, 'land_zombie.png')
+    zombie_land = Land(2200, 70, 'Resources\Stage\Stage1\Land\Land_Zombie.png')
 
     for i in range(10):
         roads = Land(random.randint(2300,4000), 5, None)
@@ -365,17 +368,11 @@ def create_objects():
     create_man()
 
 def delete_objects():
-    for stone in stones:
-        stones.remove(stone)
-
-    for zombie in zombies:
-        zombies.remove(zombie)
-
-    for lands in land:
-        land.remove(lands)
-
-    for master in man:
-        man.remove(master)
+    global stones, zombies, land, man
+    del(stones)
+    del(zombies)
+    del(land)
+    del(man)
 
 
 # state

@@ -12,8 +12,8 @@ counter = 0
 
 def enter():
     global image, bg
-    image = load_image('stageclear.png')
-    bg = load_image('stage_1.png')
+    image = load_image('Resources\GameClear\StageClear.png')
+    bg = load_image('Resources\GameClear\BackGround.png')
 
 
 def exit():
@@ -39,8 +39,8 @@ def handle_events(frame_time):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             #if keydown 'p' return to previous state
-            #game_framework.push_state(main_state_2)
-            game_framework.quit()
+            game_framework.push_state(main_state_2)
+            #game_framework.quit()
 
 
 def pause(): pass

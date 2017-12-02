@@ -39,11 +39,13 @@ class Heart:
         self.image = None
         self.state = self.FIRST
 
+
     def attacked(self):
         self.state += 1
         if (self.state == self.DIE):
             #game_framework.pop_state()
             pass
+        
 
     def draw(self):
         if(self.state == self.FIRST):

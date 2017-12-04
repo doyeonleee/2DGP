@@ -2,8 +2,7 @@ import game_framework
 from pico2d import *
 
 import title_state
-#import main_state
-import main_state_2
+import main_state
 
 name = "PauseState"
 image = None

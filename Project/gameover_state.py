@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 
-import main_state_2
+import main_state
 import title_state
 
 name = "gameover"

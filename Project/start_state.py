@@ -2,7 +2,7 @@ import game_framework
 from pico2d import *
 from global_values import *
 
-#import main_state
+import main_state
 import title_state
 
 

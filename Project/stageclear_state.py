@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 
-import main_state_2
+import main_state
 import title_state
 
 name = "gameover"
@@ -39,7 +39,7 @@ def handle_events(frame_time):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             #if keydown 'p' return to previous state
-            game_framework.push_state(main_state_2)
+            game_framework.push_state(main_state)
             #game_framework.quit()
 
 

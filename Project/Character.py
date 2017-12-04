@@ -1,15 +1,14 @@
 import random
 
 from pico2d import *
-from global_values import *
+from global_values import window_width, window_height
 
-CHARACTER_RUNNING = False
 
-#Create Cat
 class Cat:
+    image = None
     # Cat size : 100 X 100 (100cm X 100cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 40.0  # 30km/h
+    RUN_SPEED_KMPH = 100.0  # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -18,82 +17,91 @@ class Cat:
     FRAMES_PER_RUN_ACTION = 8
     FRAMES_PER_IDLE_ACTION = 10
 
-    image = None
-    RUN_STATE = False
-    LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE = 0, 1, 2, 3
+    LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE, LEFT_JUMP, RIGHT_JUMP = 0, 1, 2, 3, 4, 5
 
+    HANDLE_STATE = {
+        #LEFT_RUN : HANDLE_LEFT_RUN
+        #RIGHT_RUN : HANDLE_RIGHT_RUN
+        #LEFT_STAND : HANDLE_LEFT_STAND
+        #RIGHT_STAND : HANDLE_RIGHT_STAND
+    }
 
     def __init__(self):
-        self.x, self.y = 0, 90
+        self.x, self.y = 300, 0
+        self.canvas_width = window_width
+        self.canvas_height = window_height
+        self.total_frames = 0.0
+        #self.xdir = 0
+
+        #self.x, self.y = 300, 110
         self.idle_frame = random.randint(0, 7)
         self.run_frame = random.randint(0, 9)
-        self.life_time = 0.0
-        self.total_idle_frames = 0.0
-        self.total_run_frames = 0.0
-        self.frame = 0
+        #self.frame = 0
         self.dir = 0
         self.state = self.RIGHT_IDLE
         self.jump_speed = 0
 
-    #RUN = 8, IDLE = 10
-    # frame == RUN = 8, IDLE = 10
+    #starting point
+    def set_background(self,bg):
+        self.bg = bg
+        self.x = self.bg.w / 2 - 2015
+        #self.y = self.bg.h / 2
+        print(self.x,self.y)
+
+
     def update(self, frame_time):
         def clamp(minimun, x, maximum):
             return max(minimun, min(x, maximum))
 
-        self.life_time += frame_time
         distance = Cat.RUN_SPEED_PPS * frame_time
+
         if self.state in (self.RIGHT_IDLE, self.LEFT_IDLE):
-            self.total_idle_frames += Cat.FRAMES_PER_IDLE_ACTION * Cat.ACTION_PER_TIME * frame_time
-            self.frame = (self.frame + 1) % 10
+            self.idle_frame = (self.idle_frame + 1) % 10
             self.x += (self.dir * distance)
 
         elif self.state in (self.RIGHT_RUN, self.LEFT_RUN):
-            self.total_run_frames += Cat.FRAMES_PER_RUN_ACTION * Cat.ACTION_PER_TIME * frame_time
-            self.frame = (self.frame + 1) % 8
+            self.run_frame = (self.run_frame + 1) % 8
             self.x += (self.dir * distance)
 
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
             self.y = clamp(0, self.y, 400)
-
         else:
             self.y += (self.jump_speed * distance)
 
-        if (self.y >= 400):
+        if (self.y >= 310):
             self.jump_speed = -3
 
-        if (self.y <= 160):
+        if (self.y <= 110):
             self.jump_speed = 0
-            self.y = 160
-
-        self.x = clamp(0, self.x, 1800)
-
+            self.y = 110
+        print(self.x)
+        #self.x = clamp(10, self.x, 10000)
 
     def draw(self):
-        global CHARACTER_RUNNING
         if self.state == self.RIGHT_IDLE:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_Right_Idle2.png')
-                self.image.clip_draw(self.frame * 98, 0, 89, 90, self.x, self.y)
+                self.image = load_image('Resources\Character\Cat\Cat_Right_Idle.png')
+                self.image.clip_draw(self.idle_frame * 98, 0, 89, 90, self.canvas_width // 2, self.y)
                 self.dir = 0
         elif self.state == self.LEFT_IDLE:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_LEFT_Idle2.png')
-                self.image.clip_draw(self.frame * 98, 0, 89, 90, self.x, self.y)
+                self.image = load_image('Resources\Character\Cat\Cat_LEFT_Idle.png')
+                self.image.clip_draw(self.idle_frame * 98, 0, 89, 90, self.canvas_width // 2, self.y)
                 self.dir = 0
         elif self.state == self.RIGHT_RUN:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_Right_RUN.png')
-                self.image.clip_draw(self.frame * 100, 0, 100, 101, self.x, self.y)
+                self.image = load_image('Resources\Character\Cat\Cat_Right_RUN.png')
+                self.image.clip_draw(self.run_frame * 100, 0, 100, 101, self.canvas_width // 2, self.y)
                 self.dir = 1
         elif self.state == self.LEFT_RUN:
             if Cat.image == None:
-                self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Cat_LEFT_RUN.png')
-                self.image.clip_draw(self.frame * 100, 0, 100, 101, self.x, self.y)
+                self.image = load_image('Resources\Character\Cat\Cat_LEFT_RUN.png')
+                self.image.clip_draw(self.run_frame * 100, 0, 100, 101, self.canvas_width // 2, self.y)
                 self.dir = -1
 
     def handle_event(self, event):
+        global cat_run_status
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
             if self.state in (self.RIGHT_IDLE, self.LEFT_IDLE):
                 self.state = self.LEFT_RUN
@@ -111,26 +119,34 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-            self.jump_speed = 3
+            self.jump_speed = 2
+            print('pressed')
 
 
     def get_bb(self):
-        return self.x - 20, self.y - 30, self.x + 20, self.y + 30
+        return self.x - 20, self.y - 35, self.x + 20, self.y + 35
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
-#Create Man
+    def stop(self, master):
+        pass
+
+
+
 class Man:
-    def __init__(self):
-        self.x, self.y = 1750, 200
-        self.image = load_image('E:\\Data\\2DGP\\Project\\Resourse\\Man.png')
+    def __init__(self,stage):
+        self.canvas_width = window_width
+        self.canvas_height = window_height
+        self.bg = stage
+        self.x, self.y = 4780, 150
+        self.image = load_image('Resources\Character\Man\Man.png')
 
     def draw(self):
-        self.image.draw(self.x, self.y)
+        self.image.draw(self.x - self.bg.window_left, self.y - self.bg.window_bottom)
 
     def get_bb(self):
-        pass
+        return self.x - 75, self.y - 70, self.x + 75, self. y + 70
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())

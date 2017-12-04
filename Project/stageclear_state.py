@@ -27,7 +27,7 @@ def update(frame_time):
 def draw(frame_time):
     global image, counter
     clear_canvas()
-    #main_state_2.draw_main_scene(frame_time)
+    #main_state.draw_main_scene(frame_time)
     bg.draw(900,300)
     image.draw(730,300)
     update_canvas()

@@ -4,10 +4,12 @@ from pico2d import *
 from global_values import window_width, window_height
 
 class Enemy:
-    pass
-    #Stage1 Enemy
+    def __init__(self,stage):
+        self.canvas_width = window_width
+        self.canvas_height = window_height
+        self.total_frames = 0.0
+        self.stage = stage
 
-    #Stage2 Enemy
 
 class Zombie:
     # Zombie size : 124 X 150 (124cm X 150cm)

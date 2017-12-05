@@ -3,8 +3,6 @@ import gameover_state
 from pico2d import *
 from global_values import window_width, window_height
 
-
-
 class Heart:
     FIRST, SECOND, THIRD, LAST, DIE = 0, 1, 2, 3, 4
 

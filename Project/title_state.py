@@ -13,7 +13,6 @@ counter = 0
 window_width = 1479
 window_height = 600
 
-#load image( 1479 X 600 )
 def enter():
     global image,text
     game_framework.reset_time()
@@ -34,11 +33,7 @@ def handle_events(frame_time):
             if( event.type, event.key ) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif( event.type, event.key ) == (SDL_KEYDOWN, SDLK_SPACE):
-                #game_framework.change_state(main_state_2)
                 game_framework.change_state(main_state)
-                #game_framework.quit()
-
-
 
 def draw(frame_time):
     global counter

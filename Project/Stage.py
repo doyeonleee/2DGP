@@ -53,14 +53,12 @@ class Stage:
         del self.bgm
 
 
-class Land(Stage):
-    image = None
-
+class Land:
     def __init__(self,stage):
         self.canvas_width = window_width
         self.canvas_height = window_height
-        self.bg = stage
-        if self.bg.state == self.bg.STAGE1:
+        self.stage = stage
+        if self.stage.state == self.stage.STAGE1:
             self.start_land = load_image('Resources\Stage\Stage1\Land\Land_Start.png')
             self.start_x, self.start_y = 750 , 50
 
@@ -83,30 +81,30 @@ class Land(Stage):
             self.zombie_land = load_image('Resources\Stage\Stage1\Land\Land_Zombie.png')
             self.zombie_x,self.zombie_y = 2800, 70
 
-        elif self.bg.state == self.bg.STAGE2:
+        elif self.stage.state == self.stage.STAGE2:
             pass
-        elif self.bg.state == self.bg.STAGE3:
+        elif self.stage.state == self.stage.STAGE3:
             pass
 
     def draw(self):
-        if self.bg.state == self.bg.STAGE1:
-            self.start_land.draw(self.start_x - self.bg.window_left, self.start_y - self.bg.window_bottom)
+        if self.stage.state == self.stage.STAGE1:
+            self.start_land.draw(self.start_x - self.stage.window_left, self.start_y - self.stage.window_bottom)
 
-            self.road1.draw(self.road1_x - self.bg.window_left, self.road1_y - self.bg.window_bottom)
-            self.road2.draw(self.road2_x - self.bg.window_left, self.road2_y - self.bg.window_bottom)
-            self.road3.draw(self.road3_x - self.bg.window_left, self.road3_y - self.bg.window_bottom)
-            self.road4.draw(self.road4_x - self.bg.window_left, self.road4_y - self.bg.window_bottom)
-            self.road5.draw(self.road5_x - self.bg.window_left, self.road5_y - self.bg.window_bottom)
-            self.road6.draw(self.road6_x - self.bg.window_left, self.road6_y - self.bg.window_bottom)
+            self.road1.draw(self.road1_x - self.stage.window_left, self.road1_y - self.stage.window_bottom)
+            self.road2.draw(self.road2_x - self.stage.window_left, self.road2_y - self.stage.window_bottom)
+            self.road3.draw(self.road3_x - self.stage.window_left, self.road3_y - self.stage.window_bottom)
+            self.road4.draw(self.road4_x - self.stage.window_left, self.road4_y - self.stage.window_bottom)
+            self.road5.draw(self.road5_x - self.stage.window_left, self.road5_y - self.stage.window_bottom)
+            self.road6.draw(self.road6_x - self.stage.window_left, self.road6_y - self.stage.window_bottom)
 
-            self.skyroad1.draw(self.skyroad1_x - self.bg.window_left, self.skyroad1_y - self.bg.window_bottom)
+            self.skyroad1.draw(self.skyroad1_x - self.stage.window_left, self.skyroad1_y - self.stage.window_bottom)
 
-            self.zombie_land.draw(self.zombie_x - self.bg.window_left, self.zombie_y - self.bg.window_bottom)
+            self.zombie_land.draw(self.zombie_x - self.stage.window_left, self.zombie_y - self.stage.window_bottom)
 
-        elif self.bg.state == self.bg.STAGE2:
+        elif self.stage.state == self.stage.STAGE2:
             pass
 
-        elif self.bg.state == self.bg.STAGE3:
+        elif self.stage.state == self.stage.STAGE3:
             pass
 
     def update(self,frame_time):

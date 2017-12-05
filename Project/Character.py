@@ -17,7 +17,7 @@ class Cat:
     FRAMES_PER_RUN_ACTION = 8
     FRAMES_PER_IDLE_ACTION = 10
 
-    LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE, LEFT_JUMP, RIGHT_JUMP = 0, 1, 2, 3, 4, 5
+    LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE, JUMP = 0, 1, 2, 3, 4
 
     HANDLE_STATE = {
         #LEFT_RUN : HANDLE_LEFT_RUN
@@ -30,22 +30,16 @@ class Cat:
         self.x, self.y = 300, 0
         self.canvas_width = window_width
         self.canvas_height = window_height
-        self.total_frames = 0.0
-        #self.xdir = 0
-
-        #self.x, self.y = 300, 110
         self.idle_frame = random.randint(0, 7)
         self.run_frame = random.randint(0, 9)
-        #self.frame = 0
         self.dir = 0
-        self.state = self.RIGHT_IDLE
         self.jump_speed = 0
+        self.state = self.RIGHT_IDLE
 
     #starting point
     def set_background(self,bg):
         self.bg = bg
         self.x = self.bg.w / 2 - 2015
-        #self.y = self.bg.h / 2
         print(self.x,self.y)
 
 
@@ -63,6 +57,7 @@ class Cat:
             self.run_frame = (self.run_frame + 1) % 8
             self.x += (self.dir * distance)
 
+        #self.state == JUMP
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
             self.y = clamp(0, self.y, 400)
@@ -75,8 +70,6 @@ class Cat:
         if (self.y <= 110):
             self.jump_speed = 0
             self.y = 110
-        print(self.x)
-        #self.x = clamp(10, self.x, 10000)
 
     def draw(self):
         if self.state == self.RIGHT_IDLE:
@@ -119,8 +112,8 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+            #self.state = JUMP
             self.jump_speed = 2
-            print('pressed')
 
 
     def get_bb(self):
@@ -132,21 +125,22 @@ class Cat:
     def stop(self, master):
         pass
 
-
-
 class Man:
-    def __init__(self,stage):
+    def __init__(self, stage):
         self.canvas_width = window_width
         self.canvas_height = window_height
-        self.bg = stage
+        self.stage = stage
         self.x, self.y = 4780, 150
         self.image = load_image('Resources\Character\Man\Man.png')
 
     def draw(self):
-        self.image.draw(self.x - self.bg.window_left, self.y - self.bg.window_bottom)
+        self.image.draw(self.x - self.stage.window_left, self.y - self.stage.window_bottom)
 
     def get_bb(self):
         return self.x - 75, self.y - 70, self.x + 75, self. y + 70
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+    def update(self,frame_time):
+        pass

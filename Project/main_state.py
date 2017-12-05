@@ -16,6 +16,7 @@ from Stage import Land as Land
 from Life import Heart as Heart
 from Character import Cat as Cat
 from Character import Man as Man
+from Obstacle import Enemy as Enemy
 
 from global_values import window_height, window_width
 
@@ -26,25 +27,28 @@ cat = None
 man = None
 lands = None
 heart = None
+enemy = None
 
 def create_objects():
-    global stage, cat, lands, man, heart
+    global stage, cat, lands, man, heart, enemy
     stage = Background()
     cat = Cat()
     heart = Heart()
     lands = Land(stage)
     man = Man(stage)
+    enemy = Enemy(stage)
 
     stage.set_center_object(cat)
     cat.set_background(stage)
 
 def delete_objects():
-    global stage, cat, lands, man, heart
+    global stage, cat, lands, man, heart, enemy
     del(stage)
     del(cat)
     del(lands)
     del(man)
     del(heart)
+    del(enemy)
 
 def enter():
     open_canvas(window_width, window_height)
@@ -76,6 +80,7 @@ def update(frame_time):
     cat.update(frame_time)
     lands.update(frame_time)
     man.update(frame_time)
+    enemy.update(frame_time)
     update_canvas()
 
 
@@ -83,6 +88,7 @@ def draw_main_scene(frame_time):
     stage.draw()
     lands.draw()
     cat.draw()
+    enemy.draw()
     man.draw()
     heart.draw()
 

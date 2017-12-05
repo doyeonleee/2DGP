@@ -7,8 +7,8 @@ from global_values import window_width, window_height
 class Cat:
     image = None
     # Cat size : 100 X 100 (100cm X 100cm)
-    PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 30cm
-    RUN_SPEED_KMPH = 100.0  # 30km/h
+    PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 10cm
+    RUN_SPEED_KMPH = 100.0          # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -50,37 +50,39 @@ class Cat:
         distance = Cat.RUN_SPEED_PPS * frame_time
 
         if self.state in (self.RIGHT_IDLE, self.LEFT_IDLE):
-            self.idle_frame = (self.idle_frame + 1) % 10
+            self.idle_frame = (self.idle_frame + 1) % self.FRAMES_PER_IDLE_ACTION
             self.x += (self.dir * distance)
 
         elif self.state in (self.RIGHT_RUN, self.LEFT_RUN):
-            self.run_frame = (self.run_frame + 1) % 8
+            self.run_frame = (self.run_frame + 1) % self.FRAMES_PER_RUN_ACTION
             self.x += (self.dir * distance)
 
         #self.state == JUMP
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
-            self.y = clamp(0, self.y, 400)
+            self.y = clamp(0, self.y, 500)
         else:
             self.y += (self.jump_speed * distance)
 
-        if (self.y >= 310):
-            self.jump_speed = -3
+        if (self.y >= 500):
+            self.jump_speed = -1
 
         if (self.y <= 110):
             self.jump_speed = 0
             self.y = 110
 
     def draw(self):
+        # idle frame width 98 , cat size = 89 x 90 (px)
+        # run frame width 100 , cat size = 100 x 101 (px)
         if self.state == self.RIGHT_IDLE:
             if Cat.image == None:
                 self.image = load_image('Resources\Character\Cat\Cat_Right_Idle.png')
-                self.image.clip_draw(self.idle_frame * 98, 0, 89, 90, self.canvas_width // 2, self.y)
+                self.image.clip_draw(self.idle_frame * 98, 0, 98, 90, self.canvas_width // 2, self.y)
                 self.dir = 0
         elif self.state == self.LEFT_IDLE:
             if Cat.image == None:
                 self.image = load_image('Resources\Character\Cat\Cat_LEFT_Idle.png')
-                self.image.clip_draw(self.idle_frame * 98, 0, 89, 90, self.canvas_width // 2, self.y)
+                self.image.clip_draw(self.idle_frame * 98, 0, 98, 90, self.canvas_width // 2, self.y)
                 self.dir = 0
         elif self.state == self.RIGHT_RUN:
             if Cat.image == None:
@@ -113,7 +115,7 @@ class Cat:
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             #self.state = JUMP
-            self.jump_speed = 2
+            self.jump_speed = 1
 
 
     def get_bb(self):

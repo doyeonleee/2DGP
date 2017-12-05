@@ -3,6 +3,7 @@ import random
 from pico2d import *
 from global_values import window_width, window_height
 
+#stage width 5431 x 755px = 5.431km
 class Stage:
     image = None
     STAGE1, STAGE2, STAGE3 = 0, 1, 2

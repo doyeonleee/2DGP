@@ -57,12 +57,12 @@ class Enemy:
         #zombie walk frame width 100, height 121
         if self.enemy_status == self.ZOMBIE:
             if self.state == self.RIGHT_WALK:
-                self.image = load_image('Resources\Obstacle\Zombie\Zombie_Right.png')
+                self.image = load_image('Resources\Obstacle\Stage1\Zombie\Zombie_Right.png')
                 self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
                 self.dir = 1
             elif self.state == self.LEFT_WALK:
-                self.image = load_image('Resources\Obstacle\Zombie\Zombie_Left.png')
+                self.image = load_image('Resources\Obstacle\Stage1\Zombie\Zombie_Left.png')
                 self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
                 self.dir = -1
@@ -82,7 +82,7 @@ class Stone:
     def __init__(self, stage):
         self.stage = stage
         if self.stage.state == self.stage.STAGE1:
-            self.image = load_image('Resources\Obstacle\Stone\Stage1_Stone.png')
+            self.image = load_image('Resources\Obstacle\Stage1\Stage1_Stone.png')
             self.x, self.y = 1500, 80
             #self.x1, self.y1 = 1500, 80
             self.x2, self.y2 = 3000, 80

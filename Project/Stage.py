@@ -10,7 +10,7 @@ class Stage:
     STAGE1, STAGE2, STAGE3 = 0, 1, 2
 
     def __init__(self):
-        self.image = load_image('Resources\Stage\Stage1\Background\Stage1_BackGround (2).png')
+        self.image = load_image('Resources\Stage\Stage1\Background\Stage1_BackGround.png')
         #self.image= None
         self.canvas_width = window_width
         self.canvas_height = window_height

@@ -18,6 +18,7 @@ def enter():
     txt = load_image('Resources\GameOver\GameOver_txt.png')
 
 
+
 def exit():
     global image, bg, txt
     del(image)
@@ -34,7 +35,6 @@ def update(frame_time):
 def draw(frame_time):
     global image, counter
     clear_canvas()
-    #main_state.draw_main_scene(frame_time)
     bg.draw(900,300)
     if counter < 50:
         txt.draw(770, 200)

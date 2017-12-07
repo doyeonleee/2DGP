@@ -17,6 +17,7 @@ from Life import Heart as Heart
 from Character import Cat as Cat
 from Character import Man as Man
 from Obstacle import Enemy as Enemy
+from Obstacle import Stone as Stone
 
 from global_values import window_height, window_width
 
@@ -28,27 +29,29 @@ man = None
 lands = None
 heart = None
 enemy = None
+stone = None
 
 def create_objects():
-    global stage, cat, lands, man, heart, enemy
+    global stage, cat, lands, man, heart, enemy, stone
     stage = Background()
     cat = Cat()
     heart = Heart()
     lands = Land(stage)
     man = Man(stage)
     enemy = Enemy(stage)
-
+    stone = Stone(stage)
     stage.set_center_object(cat)
     cat.set_background(stage)
 
 def delete_objects():
-    global stage, cat, lands, man, heart, enemy
+    global stage, cat, lands, man, heart, enemy, stone
     del(stage)
     del(cat)
     del(lands)
     del(man)
     del(heart)
     del(enemy)
+    del(stone)
 
 def enter():
     open_canvas(window_width, window_height)
@@ -81,16 +84,41 @@ def update(frame_time):
     lands.update(frame_time)
     man.update(frame_time)
     enemy.update(frame_time)
+
+    if collide(cat,stone):
+        heart.attacked()
+
+    if collide(cat,enemy):
+        heart.attacked()
+
+    if collide(cat,lands):
+        print('collision')
+        lands.stop(cat)
+
+    if heart.state == heart.DIE:
+        game_framework.push_state(gameover_state)
+
+    if cat.x >= 5000:
+        game_framework.push_state(stageclear_state)
+
     update_canvas()
 
 
 def draw_main_scene(frame_time):
     stage.draw()
+    stone.draw()
     lands.draw()
     cat.draw()
     enemy.draw()
     man.draw()
     heart.draw()
+
+    #stone.draw_bb()
+    #lands.draw_bb()
+    #cat.draw_bb()
+    #enemy.draw_bb()
+    #man.draw_bb()
+
 
 def draw(frame_time):
     clear_canvas()

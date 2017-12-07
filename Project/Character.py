@@ -19,13 +19,6 @@ class Cat:
 
     LEFT_RUN, RIGHT_RUN, LEFT_IDLE, RIGHT_IDLE, JUMP = 0, 1, 2, 3, 4
 
-    HANDLE_STATE = {
-        #LEFT_RUN : HANDLE_LEFT_RUN
-        #RIGHT_RUN : HANDLE_RIGHT_RUN
-        #LEFT_STAND : HANDLE_LEFT_STAND
-        #RIGHT_STAND : HANDLE_RIGHT_STAND
-    }
-
     def __init__(self):
         self.x, self.y = 300, 0
         self.canvas_width = window_width
@@ -39,9 +32,8 @@ class Cat:
     #starting point
     def set_background(self,bg):
         self.bg = bg
+        #image width / 2 - 2015
         self.x = self.bg.w / 2 - 2015
-        print(self.x,self.y)
-
 
     def update(self, frame_time):
         def clamp(minimun, x, maximum):
@@ -60,11 +52,11 @@ class Cat:
         #self.state == JUMP
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
-            self.y = clamp(0, self.y, 500)
+            self.y = clamp(0, self.y, 350)
         else:
             self.y += (self.jump_speed * distance)
 
-        if (self.y >= 500):
+        if (self.y >= 350):
             self.jump_speed = -1
 
         if (self.y <= 110):
@@ -114,18 +106,16 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-            #self.state = JUMP
             self.jump_speed = 1
 
 
     def get_bb(self):
-        return self.x - 20, self.y - 35, self.x + 20, self.y + 35
+        return self.x - 20 - self.bg.window_left, self.y - 40 - self.bg.window_bottom, \
+               self.x + 20 - self.bg.window_left, self.y + 40 - self.bg.window_bottom
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
 
-    def stop(self, master):
-        pass
 
 class Man:
     def __init__(self, stage):

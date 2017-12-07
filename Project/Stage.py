@@ -1,6 +1,7 @@
 import random
 
 from pico2d import *
+from collision import *
 from global_values import window_width, window_height
 
 #stage width 5431 x 755px = 5.431km
@@ -59,6 +60,7 @@ class Land:
         self.canvas_width = window_width
         self.canvas_height = window_height
         self.stage = stage
+        self.roads = []
         if self.stage.state == self.stage.STAGE1:
             self.start_land = load_image('Resources\Stage\Stage1\Land\Land_Start.png')
             self.start_x, self.start_y = 750 , 50
@@ -112,10 +114,62 @@ class Land:
         pass
 
     def draw_bb(self):
-        pass
+        draw_rectangle(*self.get_bb())
+        #draw_rectangle(self.start_x - 300 - self.stage.window_left, self.start_y - 10 - self.stage.window_bottom,
+        #               self.start_x + 350 - self.stage.window_left, self.start_y + 15 - self.stage.window_bottom)
+        #draw_rectangle(self.road2_x - 300 - self.stage.window_left, self.road2_y - 30 - self.stage.window_bottom,
+        #               self.road2_x + 300 - self.stage.window_left, self.road2_y + 60 - self.stage.window_bottom)
+        #draw_rectangle(self.road3_x - 300 - self.stage.window_left, self.road3_y - 30 - self.stage.window_bottom,
+        #               self.road3_x + 300 - self.stage.window_left, self.road3_y + 60 - self.stage.window_bottom)
+        #draw_rectangle(self.road4_x - 300 - self.stage.window_left, self.road4_y - 30 - self.stage.window_bottom,
+        #               self.road4_x + 300 - self.stage.window_left, self.road4_y + 60 - self.stage.window_bottom)
+        #draw_rectangle(self.road5_x - 300 - self.stage.window_left, self.road5_y - 30 - self.stage.window_bottom,
+        #               self.road5_x + 300 - self.stage.window_left, self.road5_y + 60 - self.stage.window_bottom)
+        #draw_rectangle(self.road6_x - 300 - self.stage.window_left, self.road6_y - 30 - self.stage.window_bottom,
+        #               self.road6_x + 300 - self.stage.window_left, self.road6_y + 60 - self.stage.window_bottom)
+        #draw_rectangle(self.skyroad1_x - 230 - self.stage.window_left, self.skyroad1_y - 35 - self.stage.window_bottom,
+        #               self.skyroad1_x + 230 -  self.stage.window_left, self.skyroad1_y + 35 - self.stage.window_bottom)
+        #draw_rectangle(self.zombie_x - 400 - self.stage.window_left, self.zombie_y - 50 - self.stage.window_bottom,
+        #               self.zombie_x + 270 - self.stage.window_left, self.zombie_y - self.stage.window_bottom)
 
     def get_bb(self):
-        pass
+
+        if self.skyroad1:
+            return self.skyroad1_x - 200 - self.stage.window_left, self.skyroad1_y - 35 - self.stage.window_bottom, \
+                       self.skyroad1_x + 200 -  self.stage.window_left, self.skyroad1_y + 35 - self.stage.window_bottom
 
 
+        #if self.zombie_land:
+        #    return self.zombie_x - 400 - self.stage.window_left, self.zombie_y - 50 - self.stage.window_bottom, \
+        #               self.zombie_x + 270 - self.stage.window_left, self.zombie_y - self.stage.window_bottom
+        #if self.start_land:
+        #    return self.start_x - 300 - self.stage.window_left, self.start_y - 10 - self.stage.window_bottom,   \
+        #               self.start_x + 350 - self.stage.window_left, self.start_y + 15 - self.stage.window_bottom
+        #if self.road2:
+        #    return self.road2_x - 300 - self.stage.window_left, self.road2_y - 30 - self.stage.window_bottom,   \
+        #               self.road2_x + 300 - self.stage.window_left, self.road2_y + 60 - self.stage.window_bottom
+        #if self.road3:
+        #    return self.road3_x - 300 - self.stage.window_left, self.road3_y - 30 - self.stage.window_bottom,   \
+        #               self.road3_x + 300 - self.stage.window_left, self.road3_y + 60 - self.stage.window_bottom
+        #if self.road4:
+        #    return self.road4_x - 300 - self.stage.window_left, self.road4_y - 30 - self.stage.window_bottom,   \
+        #               self.road4_x + 300 - self.stage.window_left, self.road4_y + 60 - self.stage.window_bottom
+        #if self.road5:
+        #    return self.road5_x - 300 - self.stage.window_left, self.road5_y - 30 - self.stage.window_bottom,   \
+        #               self.road5_x + 300 - self.stage.window_left, self.road5_y + 60 - self.stage.window_bottom
+        #if self.road6:
+        #    return self.road6_x - 300 - self.stage.window_left, self.road6_y - 30 - self.stage.window_bottom,   \
+        #               self.road6_x + 300 - self.stage.window_left, self.road6_y + 60 - self.stage.window_bottom
+
+
+    def stop(self,obj):
+        if self.stage.state == self.stage.STAGE1:
+            obj.y = 230
+            obj.jump_speed = 0
+            #if collide(obj, self.skyroad1):
+            #    obj.y = 300
+            #if collide(obj, (self.start_land, self.road1, self.road2, self.road3, self.road4, self.road5, self.road6)):
+            #    obj.y = 100
+            #if collide(obj, self.zombie_land):
+            #    obj.y = 100
 

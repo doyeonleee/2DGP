@@ -11,10 +11,24 @@ class Enemy:
     ZOMBIE_WALK_SPEED_MPM = (ZOMBIE_WALK_SPEED_KMPH * 1000.0 / 60.0)
     ZOMBIE_WALK_SPEED_MPS = (ZOMBIE_WALK_SPEED_MPM / 60.0)
     ZOMBIE_WALK_SPEED_PPS = (ZOMBIE_WALK_SPEED_MPS * PIXEL_PER_METER)
-    FRAMES_PER_WALK_ACTION = 10
+    ZOMBIE_FRAMES_PER_WALK_ACTION = 10
+
+    PUMKIN_WALK_SPEED_KMPH = 50.0
+    PUMKIN_WALK_SPEED_KMPH = 50.0  # 10km/h
+    PUMKIN_WALK_SPEED_MPM = (PUMKIN_WALK_SPEED_KMPH * 1000.0 / 60.0)
+    PUMKIN_WALK_SPEED_MPS = (PUMKIN_WALK_SPEED_MPM / 60.0)
+    PUMKIN_WALK_SPEED_PPS = (PUMKIN_WALK_SPEED_MPS * PIXEL_PER_METER)
+    PUMKIN_FRAMES_PER_WALK_ACTION = 10
+
+    SANTA_WALK_SPEED_KMPH = 50.0
+    SANTA_WALK_SPEED_KMPH = 50.0  # 10km/h
+    SANTA_WALK_SPEED_MPM = (SANTA_WALK_SPEED_KMPH * 1000.0 / 60.0)
+    SANTA_WALK_SPEED_MPS = (SANTA_WALK_SPEED_MPM / 60.0)
+    SANTA_WALK_SPEED_PPS = (SANTA_WALK_SPEED_MPS * PIXEL_PER_METER)
+    SANTA_FRAMES_PER_WALK_ACTION = 13
 
     image = None
-    ZOMBIE = 0
+    ZOMBIE, PUMKIN, SANTA = 0, 1, 2
     LEFT_WALK, RIGHT_WALK = 0, 1
 
     def __init__(self,stage):
@@ -27,6 +41,7 @@ class Enemy:
             self.dir = 0
             self.state = self.LEFT_WALK
             self.x, self.y = 2500, 120
+            self.x1, self.y1 = 3800, 120
         elif self.stage.state == self.stage.STAGE2:
             pass
 
@@ -36,22 +51,35 @@ class Enemy:
         distance = Enemy.ZOMBIE_WALK_SPEED_PPS * frame_time
         if self.enemy_status == self.ZOMBIE:
             clamp(2500,self.x, 3000)
+            clamp(3500, self.x1, 4000)
             if self.x <= 2500:
                 self.state = self.RIGHT_WALK
             elif self.x >= 3000:
                 self.state = self.LEFT_WALK
+
+            if self.x1 <= 3500:
+                self.state = self.RIGHT_WALK
+            elif self.x1 >= 4000:
+                self.state = self.LEFT_WALK
+
             if self.state in (self.RIGHT_WALK,):
                 self.dir = 1
-                self.walk_frame = (self.walk_frame + 1) % 10
+                self.walk_frame = (self.walk_frame + 1) % self.ZOMBIE_FRAMES_PER_WALK_ACTION
                 self.x += (self.dir * distance)
+                self.x1 += (self.dir * distance)
+
             elif self.state in (self.LEFT_WALK,):
                 self.dir = -1
-                self.walk_frame = (self.walk_frame + 1) % 10
+                self.walk_frame = (self.walk_frame + 1) % self.ZOMBIE_FRAMES_PER_WALK_ACTION
                 self.x += (self.dir * distance)
+                self.x1 += (self.dir * distance)
+
+
 
         else:
             ####add enemy
             pass
+
 
     def draw(self):
         #zombie walk frame width 100, height 121
@@ -60,11 +88,19 @@ class Enemy:
                 self.image = load_image('Resources\Obstacle\Stage1\Zombie\Zombie_Right.png')
                 self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
+
+                self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
+                                     self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
+
                 self.dir = 1
             elif self.state == self.LEFT_WALK:
                 self.image = load_image('Resources\Obstacle\Stage1\Zombie\Zombie_Left.png')
                 self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
+
+                self.image.clip_draw(self.walk_frame * 100, 0, 100, 121,
+                                     self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
+
                 self.dir = -1
 
     def handle_event(self, event):

@@ -98,8 +98,10 @@ def update(frame_time):
     if heart.state == heart.DIE:
         game_framework.push_state(gameover_state)
 
+    #클리어 조건
     if cat.x >= 5000:
         game_framework.push_state(stageclear_state)
+        stage.clear()
 
     update_canvas()
 

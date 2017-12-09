@@ -27,7 +27,7 @@ def update(frame_time):
 def draw(frame_time):
     global image, counter
     clear_canvas()
-    #main_state.draw_main_scene(frame_time)
+    main_state.draw_main_scene(frame_time)
     bg.draw(900,300)
     image.draw(730,300)
     update_canvas()
@@ -39,7 +39,8 @@ def handle_events(frame_time):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             #if keydown 'p' return to previous state
-            game_framework.push_state(main_state)
+            print('input')
+            game_framework.pop_state()
             #game_framework.quit()
 
 

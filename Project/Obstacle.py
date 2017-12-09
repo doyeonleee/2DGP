@@ -43,7 +43,12 @@ class Enemy:
             self.x, self.y = 2500, 120
             self.x1, self.y1 = 3800, 120
         elif self.stage.state == self.stage.STAGE2:
-            pass
+            self.enemy_status = self.SANTA
+            self.walk_frame = random.randint(0,12)
+            self.dir = 0
+            self.state = self.LEFT_WALK
+            self.x, self.y = 1299, 120
+            self.x1, self.y1 = 3800, 120
 
     def update(self,frame_time):
         def clamp(minimun, x, maximum):
@@ -74,11 +79,30 @@ class Enemy:
                 self.x += (self.dir * distance)
                 self.x1 += (self.dir * distance)
 
+        elif self.enemy_status == self.SANTA:
+            #clamp(2500, self.x, 3000)
+            #clamp(3500, self.x1, 4000)
+            if self.x <= 1000:
+                self.state = self.RIGHT_WALK
+            elif self.x >= 1500:
+                self.state = self.LEFT_WALK
 
+            if self.x1 <= 3500:
+                self.state = self.RIGHT_WALK
+            elif self.x1 >= 4000:
+                self.state = self.LEFT_WALK
 
-        else:
-            ####add enemy
-            pass
+            if self.state in (self.RIGHT_WALK,):
+                self.dir = 1
+                self.walk_frame = (self.walk_frame + 1) % self.SANTA_FRAMES_PER_WALK_ACTION
+                self.x += (self.dir * distance)
+                self.x1 += (self.dir * distance)
+
+            elif self.state in (self.LEFT_WALK,):
+                self.dir = -1
+                self.walk_frame = (self.walk_frame + 1) % self.SANTA_FRAMES_PER_WALK_ACTION
+                self.x += (self.dir * distance)
+                self.x1 += (self.dir * distance)
 
 
     def draw(self):
@@ -103,6 +127,27 @@ class Enemy:
 
                 self.dir = -1
 
+        elif self.enemy_status == self.SANTA:
+            if self.state == self.RIGHT_WALK:
+                self.image = load_image('Resources\Obstacle\Stage2\Santa\Santa_Right.png')
+                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                                     self.x - self.stage.window_left, self.y - self.stage.window_bottom)
+
+                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                                     self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
+
+                self.dir = 1
+            elif self.state == self.LEFT_WALK:
+                self.image = load_image('Resources\Obstacle\Stage2\Santa\Santa_Left.png')
+                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                                     self.x - self.stage.window_left, self.y - self.stage.window_bottom)
+
+                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                                     self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
+
+                self.dir = -1
+
+
     def handle_event(self, event):
         pass
 
@@ -121,6 +166,14 @@ class Stone:
             self.image = load_image('Resources\Obstacle\Stage1\Stage1_Stone.png')
             self.x, self.y = 1500, 80
             #self.x1, self.y1 = 1500, 80
+            self.x2, self.y2 = 3000, 80
+            self.x3, self.y3 = 3500, 80
+            self.x4, self.y4 = 4000, 80
+
+        elif self.stage.state == self.stage.STAGE2:
+            self.image = load_image('Resources\Obstacle\Stage2\Stage2_Stone.png')
+            self.x, self.y = 1300, 80
+            # self.x1, self.y1 = 1500, 80
             self.x2, self.y2 = 3000, 80
             self.x3, self.y3 = 3500, 80
             self.x4, self.y4 = 4000, 80

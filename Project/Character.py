@@ -8,7 +8,7 @@ class Cat:
     image = None
     # Cat size : 100 X 100 (100cm X 100cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 10cm
-    RUN_SPEED_KMPH = 100.0          # 30km/h
+    RUN_SPEED_KMPH = 50.0          # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -52,12 +52,12 @@ class Cat:
         #self.state == JUMP
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
-            self.y = clamp(0, self.y, 350)
+            self.y = clamp(0, self.y, 300)
         else:
             self.y += (self.jump_speed * distance)
 
-        if (self.y >= 350):
-            self.jump_speed = -1
+        if (self.y >= 300):
+            self.jump_speed = -2
 
         if (self.y <= 110):
             self.jump_speed = 0
@@ -106,7 +106,7 @@ class Cat:
             if self.state in (self.RIGHT_RUN,):
                 self.state = self.RIGHT_IDLE
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-            self.jump_speed = 1
+            self.jump_speed = 2
 
 
     def get_bb(self):

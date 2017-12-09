@@ -2,6 +2,7 @@ import game_framework
 from pico2d import *
 
 import main_state
+import main_state_2
 import title_state
 
 name = "gameover"
@@ -13,7 +14,7 @@ counter = 0
 def enter():
     global image, bg
     image = load_image('Resources\GameClear\StageClear.png')
-    bg = load_image('Resources\GameClear\BackGround.png')
+    bg = load_image('Resources\GameClear\BG.png')
 
 
 def exit():
@@ -27,8 +28,8 @@ def update(frame_time):
 def draw(frame_time):
     global image, counter
     clear_canvas()
-    main_state.draw_main_scene(frame_time)
-    bg.draw(900,300)
+    #main_state.draw_main_scene(frame_time)
+    bg.draw(740,300)
     image.draw(730,300)
     update_canvas()
 
@@ -37,11 +38,13 @@ def handle_events(frame_time):
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             #if keydown 'p' return to previous state
             print('input')
-            game_framework.pop_state()
+            game_framework.push_state(main_state_2)
             #game_framework.quit()
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
+            game_framework.push_state(title_state)
 
 
 def pause(): pass

@@ -7,21 +7,21 @@ class Enemy:
     # Stage1 Zombie
     # Zombie size : 100 X 121 (100cm X 121cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 10cm
-    ZOMBIE_WALK_SPEED_KMPH = 50.0   # 10km/h
+    ZOMBIE_WALK_SPEED_KMPH = 10.0   # 10km/h
     ZOMBIE_WALK_SPEED_MPM = (ZOMBIE_WALK_SPEED_KMPH * 1000.0 / 60.0)
     ZOMBIE_WALK_SPEED_MPS = (ZOMBIE_WALK_SPEED_MPM / 60.0)
     ZOMBIE_WALK_SPEED_PPS = (ZOMBIE_WALK_SPEED_MPS * PIXEL_PER_METER)
     ZOMBIE_FRAMES_PER_WALK_ACTION = 10
 
-    PUMKIN_WALK_SPEED_KMPH = 50.0
-    PUMKIN_WALK_SPEED_KMPH = 50.0  # 10km/h
+    PUMKIN_WALK_SPEED_KMPH = 10.0  # 10km/h
     PUMKIN_WALK_SPEED_MPM = (PUMKIN_WALK_SPEED_KMPH * 1000.0 / 60.0)
     PUMKIN_WALK_SPEED_MPS = (PUMKIN_WALK_SPEED_MPM / 60.0)
     PUMKIN_WALK_SPEED_PPS = (PUMKIN_WALK_SPEED_MPS * PIXEL_PER_METER)
     PUMKIN_FRAMES_PER_WALK_ACTION = 10
 
-    SANTA_WALK_SPEED_KMPH = 50.0
-    SANTA_WALK_SPEED_KMPH = 50.0  # 10km/h
+    # Stage2 Santa
+    # Santa size = 77 x 121
+    SANTA_WALK_SPEED_KMPH = 10.0  # 10km/h
     SANTA_WALK_SPEED_MPM = (SANTA_WALK_SPEED_KMPH * 1000.0 / 60.0)
     SANTA_WALK_SPEED_MPS = (SANTA_WALK_SPEED_MPM / 60.0)
     SANTA_WALK_SPEED_PPS = (SANTA_WALK_SPEED_MPS * PIXEL_PER_METER)
@@ -48,7 +48,7 @@ class Enemy:
             self.dir = 0
             self.state = self.LEFT_WALK
             self.x, self.y = 1299, 120
-            self.x1, self.y1 = 3800, 120
+            self.x1, self.y1 = 4000, 120
 
     def update(self,frame_time):
         def clamp(minimun, x, maximum):
@@ -87,9 +87,9 @@ class Enemy:
             elif self.x >= 1500:
                 self.state = self.LEFT_WALK
 
-            if self.x1 <= 3500:
+            if self.x1 <= 3800:
                 self.state = self.RIGHT_WALK
-            elif self.x1 >= 4000:
+            elif self.x1 >= 4200:
                 self.state = self.LEFT_WALK
 
             if self.state in (self.RIGHT_WALK,):
@@ -174,7 +174,7 @@ class Stone:
             self.image = load_image('Resources\Obstacle\Stage2\Stage2_Stone.png')
             self.x, self.y = 1300, 80
             # self.x1, self.y1 = 1500, 80
-            self.x2, self.y2 = 3000, 80
+            self.x2, self.y2 = 3300, 80
             self.x3, self.y3 = 3500, 80
             self.x4, self.y4 = 4000, 80
 
@@ -182,7 +182,7 @@ class Stone:
         self.image.draw(self.x - self.stage.window_left, self.y - self.stage.window_bottom)
         #self.image.draw(self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
         self.image.draw(self.x2 - self.stage.window_left, self.y2 - self.stage.window_bottom)
-        self.image.draw(self.x3 - self.stage.window_left, self.y3 - self.stage.window_bottom)
+        #self.image.draw(self.x3 - self.stage.window_left, self.y3 - self.stage.window_bottom)
         self.image.draw(self.x4 - self.stage.window_left, self.y4 - self.stage.window_bottom)
 
     def get_bb(self):

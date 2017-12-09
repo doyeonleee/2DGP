@@ -50,7 +50,7 @@ def handle_events(frame_time):
             game_framework.quit()
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             #if keydown 'p' return to previous state
-            game_framework.change_state(title_state)
+            game_framework.push_state(title_state)
 
 
 

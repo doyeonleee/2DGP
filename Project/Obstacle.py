@@ -166,7 +166,7 @@ class Stone:
             self.image = load_image('Resources\Obstacle\Stage1\Stage1_Stone.png')
             self.x, self.y = 1500, 80
             #self.x1, self.y1 = 1500, 80
-            self.x2, self.y2 = 3000, 80
+            self.x2, self.y2 = 2800, 80
             self.x3, self.y3 = 3500, 80
             self.x4, self.y4 = 4000, 80
 
@@ -182,7 +182,7 @@ class Stone:
         self.image.draw(self.x - self.stage.window_left, self.y - self.stage.window_bottom)
         #self.image.draw(self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
         self.image.draw(self.x2 - self.stage.window_left, self.y2 - self.stage.window_bottom)
-        #self.image.draw(self.x3 - self.stage.window_left, self.y3 - self.stage.window_bottom)
+        self.image.draw(self.x3 - self.stage.window_left, self.y3 - self.stage.window_bottom)
         self.image.draw(self.x4 - self.stage.window_left, self.y4 - self.stage.window_bottom)
 
     def get_bb(self):

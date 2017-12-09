@@ -54,13 +54,13 @@ def delete_objects():
     del(stone)
 
 def enter():
-    open_canvas(window_width, window_height)
+    #open_canvas(window_width, window_height)
     game_framework.reset_time()
     create_objects()
 
 def exit():
     delete_objects()
-    close_canvas()
+    #close_canvas()
 
 def pause():
     pass

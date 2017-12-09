@@ -2,10 +2,12 @@ import game_framework
 from pico2d import *
 
 import main_state
+import main_state_1
 
 name = "TitleState"
 image = None
 text = None
+bgm = None
 logo_time = 0.0
 counter = 0
 
@@ -14,10 +16,13 @@ window_width = 1479
 window_height = 600
 
 def enter():
-    global image,text
+    global image,text, bgm
     game_framework.reset_time()
     image = load_image('Resources\Title\Title.png')
     text = load_image('Resources\Title\Title_txt.png')
+    bgm = load_music('Game.mp3')
+    bgm.set_volume(64)
+    bgm.repeat_play()
 
 def exit():
     global image,text
@@ -33,7 +38,7 @@ def handle_events(frame_time):
             if( event.type, event.key ) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
             elif( event.type, event.key ) == (SDL_KEYDOWN, SDLK_SPACE):
-                game_framework.change_state(main_state)
+                game_framework.push_state(main_state_1)
 
 def draw(frame_time):
     global counter

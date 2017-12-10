@@ -92,7 +92,6 @@ def update(frame_time):
         heart.attacked()
 
     if collide(cat,lands):
-        print('collision')
         lands.stop(cat)
 
     if heart.state == heart.DIE:

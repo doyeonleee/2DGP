@@ -130,19 +130,19 @@ class Enemy:
         elif self.enemy_status == self.SANTA:
             if self.state == self.RIGHT_WALK:
                 self.image = load_image('Resources\Obstacle\Stage2\Santa\Santa_Right.png')
-                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                self.image.clip_draw(self.walk_frame * 77, 0, 76, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
 
-                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                self.image.clip_draw(self.walk_frame * 77, 0, 76, 121,
                                      self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
 
                 self.dir = 1
             elif self.state == self.LEFT_WALK:
                 self.image = load_image('Resources\Obstacle\Stage2\Santa\Santa_Left.png')
-                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                self.image.clip_draw(self.walk_frame * 77, 0, 76, 121,
                                      self.x - self.stage.window_left, self.y - self.stage.window_bottom)
 
-                self.image.clip_draw(self.walk_frame * 77, 0, 77, 121,
+                self.image.clip_draw(self.walk_frame * 77, 0, 76, 121,
                                      self.x1 - self.stage.window_left, self.y1 - self.stage.window_bottom)
 
                 self.dir = -1

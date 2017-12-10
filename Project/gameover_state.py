@@ -12,11 +12,10 @@ logo_time = 0.0
 counter = 0
 
 def enter():
-    global image, bg,txt
+    global image, bg, txt, bgm
     image = load_image('Resources\GameOver\GameOver.png')
     bg = load_image('Resources\GameOver\Background.png')
     txt = load_image('Resources\GameOver\GameOver_txt.png')
-
 
 
 def exit():

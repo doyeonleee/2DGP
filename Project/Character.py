@@ -9,7 +9,7 @@ class Cat:
     jump_sound = None
     # Cat size : 100 X 100 (100cm X 100cm)
     PIXEL_PER_METER = (10.0 / 0.3)  # 10pixel = 10cm
-    RUN_SPEED_KMPH = 50.0          # 30km/h
+    RUN_SPEED_KMPH = 150.0          # 30km/h
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -31,7 +31,7 @@ class Cat:
         self.state = self.RIGHT_IDLE
         if self.jump_sound == None:
             self.jump_sound = load_wav('Jump.wav')
-            self.jump_sound.set_volume(32)
+            self.jump_sound.set_volume(52)
 
     #starting point
     def set_background(self,bg):
@@ -56,7 +56,7 @@ class Cat:
         #self.state == JUMP
         if (self.jump_speed > 0):
             self.y += (self.jump_speed * distance)
-            self.y = clamp(0, self.y, 350)
+            self.y = clamp(0, self.y, 500)
         else:
             self.y += (self.jump_speed * distance)
 

@@ -5,7 +5,7 @@ import main_state
 import main_state_2
 import title_state
 
-name = "gameover"
+name = "stageclear"
 image = None
 bg = None
 logo_time = 0.0

@@ -20,7 +20,7 @@ def enter():
     game_framework.reset_time()
     image = load_image('Resources\Title\Title.png')
     text = load_image('Resources\Title\Title_txt.png')
-    bgm = load_music('Game.mp3')
+    bgm = load_music('Title.mp3')
     bgm.set_volume(64)
     bgm.repeat_play()
 

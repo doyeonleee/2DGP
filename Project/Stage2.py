@@ -7,18 +7,21 @@ from global_values import window_width, window_height
 #stage width 5431 x 755px = 5.431km
 class Stage:
     image = None
+    bgm = None
     STAGE1, STAGE2 = 0, 1
 
     def __init__(self):
-        #self.image = load_image('Resources\Stage\Stage1\Background\Stage1_BackGround.png')
-        #self.image= None
         self.canvas_width = window_width
         self.canvas_height = window_height
         self.state = self.STAGE2
         self.image = load_image('Resources\Stage\Stage2\Background\Stage2_BackGround.png')
         self.w = self.image.w
         self.h = self.image.h
-        self.bgm = None
+        if self.bgm == None:
+            self.bgm = load_music('Stage2.ogg')
+            self.bgm.set_volume(64)
+            self.bgm.repeat_play()
+
 
     def set_center_object(self,cat):
         self.center_object = cat

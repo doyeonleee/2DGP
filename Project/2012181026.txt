@@ -1,0 +1,46 @@
+Sun Dec 10 12:55:25 2017 +0900 sound volume update
+Sun Dec 10 11:47:43 2017 +0900 sound update
+Sun Dec 10 00:11:55 2017 +0900 sound update
+Sat Dec 9 23:27:36 2017 +0900 stage2 update
+Sat Dec 9 17:09:17 2017 +0900 stage2 update
+Thu Dec 7 17:31:42 2017 +0900 obstacle, stage, resource update
+Thu Dec 7 17:10:33 2017 +0900 Stage2 resources update
+Thu Dec 7 17:01:01 2017 +0900 code refactory
+Tue Dec 5 15:11:29 2017 +0900 update
+Tue Dec 5 12:12:53 2017 +0900 update
+Mon Dec 4 21:05:22 2017 +0900 update
+Mon Dec 4 19:48:57 2017 +0900 update
+Sat Dec 2 22:13:05 2017 +0900 update
+Wed Nov 29 22:43:50 2017 +0900 resource update
+Sun Nov 26 12:52:38 2017 +0900 update
+Sun Nov 26 04:14:09 2017 +0900 update
+Thu Nov 23 11:34:35 2017 +0900 update
+Wed Nov 22 19:39:53 2017 +0900 second ppt update
+Wed Nov 22 19:37:03 2017 +0900 second ppt update
+Wed Nov 22 13:17:03 2017 +0900 collide update
+Wed Nov 22 13:15:25 2017 +0900 state update
+Wed Nov 22 10:57:52 2017 +0900 update
+Wed Nov 22 10:56:18 2017 +0900 update
+Tue Nov 21 21:58:04 2017 +0900 obstacle update
+Tue Nov 21 21:20:09 2017 +0900 update
+Tue Nov 21 12:47:04 2017 +0900 resourse update
+Fri Nov 17 12:02:35 2017 +0900 object update
+Tue Nov 14 14:10:05 2017 +0900 first ppt update
+Tue Nov 14 14:08:14 2017 +0900 first ppt update
+Tue Nov 14 11:41:07 2017 +0900 character man update
+Mon Nov 13 23:07:28 2017 +0900 time update
+Mon Nov 13 17:16:40 2017 +0900 class file divide
+Mon Nov 13 15:37:35 2017 +0900 character controller
+Tue Nov 7 11:32:20 2017 +0900 Man.png upload
+Mon Nov 6 13:40:24 2017 +0900 .
+Mon Nov 6 13:38:22 2017 +0900 main_state, resourse upload
+Mon Nov 6 12:59:03 2017 +0900 Resourse Png upload
+Thu Nov 2 18:28:55 2017 +0900 change start_state, change title to title_BackGround, add Main_BackGround
+Thu Nov 2 14:25:12 2017 +0900 title_status, background resourse upload
+Mon Oct 30 14:59:11 2017 +0900 start_status commit
+Mon Oct 30 14:54:30 2017 +0900 title_state commit
+Mon Oct 30 12:12:00 2017 +0900 first PPT upload
+Mon Oct 30 12:10:54 2017 +0900 .gitignore upload
+Sun Oct 22 19:38:42 2017 +0900 Delete 2DGP_PPT_Last.pptx
+Sun Oct 22 19:24:23 2017 +0900 Add files via upload
+Thu Oct 19 12:10:39 2017 +0900 Initial commit
